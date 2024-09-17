@@ -1,0 +1,172 @@
+<!--
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		SiwMovie - Login
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${userDetails}">
+			<span th:text="${userDetails.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${user}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+
+	<div>
+		<a href="/"><img src="/images/logo-siw.png" width="50%"/></a>
+	</div>
+	<h1>Login</h1>
+	<form th:action="@{/login}" method="POST">
+			<div>
+				<span>Username:</span>
+				<span><input name="username" type="text" required /></span>
+			</div>
+			<div>
+				<span>Password:</span>
+				<span><input name="password" type="password" required /></span>
+			</div>
+			<div>
+				<span th:if="${param.error != null}">Username o password errati</span>
+			</div>
+			<div>
+				<span><button type="submit">Login</button></span>
+			</div>
+	</form>
+	<div>
+		<a th:href="@{/register}" th:text="Registrati">Registrati</a>
+	</div>
+</body>
+
+</html>
+
+-->
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiwMovie - Login</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa; /* Colore di sfondo chiaro per contrastare con il modulo */
+        }
+        .login-container {
+            max-width: 400px; /* Larghezza massima del modulo */
+            margin: 0 auto; /* Centra il modulo orizzontalmente */
+            padding: 20px;
+            background: #fff; /* Sfondo bianco per il modulo */
+            border-radius: 8px; /* Bordo arrotondato per il modulo */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombra leggera per il modulo */
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+        .form-group .form-text {
+            color: #dc3545; /* Colore rosso per i messaggi di errore */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="/images/figc.png" alt="SiwMovie Logo" width="30" height="30" class="d-inline-block align-text-top">
+                    FIGC
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" th:if="${userDetails}">Benvenuto, <span th:text="${userDetails.username}"></span></a>
+                        </li>
+                        <li class="nav-item" th:if="${userDetails}">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                        <li class="nav-item" th:unless="${user}">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <div class="container mt-2">
+        <div class="login-container">
+            <div class="login-header">
+                <a href="/">
+                    <img src="/images/figc.png" class="img-fluid mb-1" alt="Logo SiwMovie" style="max-width: 30%;">
+                </a>
+                <h3>Login</h3>
+            </div>
+
+            <form th:action="@{/login}" method="POST">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input id="username" name="username" type="text" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input id="password" name="password" type="password" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <div class="form-text text-danger" th:if="${param.error != null}">Username o password errati</div>
+                </div>
+                
+                
+                <div>
+					<span th:if="${param.error != null}">Username o password errati</span>
+				</div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </div>
+            </form>
+            <div class="text-center mt-3">
+                <a href="/register" class="btn btn-link">Registrati</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+-->

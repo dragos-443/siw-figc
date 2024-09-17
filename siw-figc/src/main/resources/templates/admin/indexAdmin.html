@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIGC - Homepage</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Classe per rendere il pulsante arancione */
+        .btn-orange {
+            background-color: orange;
+            color: white;
+        }
+
+        .btn-orange:hover {
+            background-color: darkorange;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="/images/figc.png" alt="Logo FIGC" width="30" height="30"
+                        class="d-inline-block align-text-top">
+                    FIGC
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item" th:if="${userDetails}">
+                            <span class="nav-link" th:text="${userDetails.username}"></span>
+                        </li>
+                        <li class="nav-item" th:if="${userDetails}">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                        <li class="nav-item" th:unless="${user}">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container text-center mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="/images/figc.png" class="img-fluid mb-4" alt="Logo FIGC" style="max-width: 10%;" />
+            </div>
+        </div>
+
+        <h1 class="mb-4">Dashboard Amministratore</h1>
+
+        <!-- Titolo "Elenco Squadre" -->
+        <h2 class="mb-4">Elenco Squadre</h2>
+
+        <div class="alert alert-info" role="alert" th:if="${allTeams == null || allTeams.isEmpty()}">
+            Non ci sono squadre nel sistema.
+        </div>
+
+        <div class="d-flex justify-content-center mb-3">
+            <ul class="list-group w-50" th:if="${allTeams != null && !allTeams.isEmpty()}">
+                <li class="list-group-item d-flex justify-content-between align-items-center" th:each="team : ${allTeams}">
+					<a th:href="@{'/team' + '/' + ${team.id}}">
+                    	<span th:text="${team.nomeSquadra} + ' (' + ${team.year} + ')'">Squadra 1 (2021)</span>
+                    </a>
+                    <!-- Pulsante di Update arancione accanto al nome -->
+                    <a th:href="@{'/admin/formUpdateTeam' + '/' + ${team.id}}" class="btn btn-orange btn-sm">Update</a>
+                </li>
+            </ul>
+        </div>
+        <div class="d-flex justify-content-center">
+    		<div class="col-md-5">
+        		<a href="/admin/formNewTeam" class="btn btn-success btn-sm w-25 mb-3">Crea una squadra</a>
+    		</div>
+		</div>
+
+        
+       
+        
+        <!-- Titolo "Elenco Giocatori" -->
+        <h2 class="mb-4">Elenco Giocatori</h2>
+
+        <div class="alert alert-info" role="alert" th:if="${allPlayers == null || allPlayers.isEmpty()}">
+            Non ci sono giocatori nel sistema.
+        </div>
+
+        <div class="d-flex justify-content-center mb-3">
+            <ul class="list-group w-50" th:if="${allPlayers != null && !allPlayers.isEmpty()}">
+                <li class="list-group-item d-flex justify-content-between align-items-center" th:each="player : ${allPlayers}">
+                    <a th:href="@{'/player' + '/' + ${player.id}}">
+						<span th:text="${player.name} + ' ' + ${player.lastname}">Giocatore</span>
+					</a>
+                    <!-- Pulsante di Elimina rosso accanto al nome -->
+                    <a th:href="@{'/admin/deletePlayer' + '/' + ${player.id}}" class="btn btn-danger btn-sm">Elimina</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="d-flex justify-content-center">
+			<div class="col-md-5">
+                <a href="/admin/formNewPlayer" class="btn btn-success btn-sm w-30 mb-3">Aggiungi un giocatore</a>
+            </div>
+		</div>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

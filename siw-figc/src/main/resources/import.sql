@@ -1,0 +1,4 @@
+insert into president(id, name, surname, codice_fiscale, username, date_of_birth) values(nextval('hibernate_sequence'), 'Marco', 'Rossi', 'MRCRSS01', 'mrossi99','1990-05-18');
+insert into team(id, nome_squadra, indirizzo, year) values(nextval('hibernate_sequence'), 'SSLazio', 'Via roma 51', 1900);
+insert into player(id, name, lastname, date_of_birth, place_of_birth, role) values(nextval('hibernate_sequence'), 'Cristiano', 'Ronaldo', '1985-02-05', 'Madeira' ,'Attaccante');
+insert into player(id, name, lastname, date_of_birth, place_of_birth, role) values(nextval('hibernate_sequence'), 'Leo', 'Messi', '2001-01-15', 'Argentina' ,'Portiere');

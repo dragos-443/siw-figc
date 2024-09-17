@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>President</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="/images/figc.png" alt="Logo FIGC" width="30" height="30"
+                        class="d-inline-block align-text-top">
+                    FIGC
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item" th:if="${userDetails}">
+                            <span class="nav-link" th:text="${userDetails.username}"></span>
+                        </li>
+                        <li class="nav-item" th:if="${userDetails}">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                        <li class="nav-item" th:unless="${user}">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container text-center mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="/images/figc.png" class="img-fluid mb-4" alt="Logo FIGC" style="max-width: 10%;" />
+            </div>
+        </div>
+
+        <h1 class="mb-4">Dashboard Presidente</h1>
+        
+
+        <!-- Nome Squadra -->
+        <p>Nome squadra: <span th:text="${nomeSquadra}">Nome squadra</span></p>
+        
+        <!-- Titolo "Elenco Giocatori" -->
+        <h2 class="mb-4">Elenco Giocatori della squadra</h2>
+
+        <div class="alert alert-info" role="alert" th:if="${playersOfTheTeam == null || playersOfTheTeam.isEmpty()}">
+            Non ci sono giocatori nella squadra che rapresenti.
+        </div>
+
+        <div class="d-flex justify-content-center mb-3">
+            <ul class="list-group w-50" th:if="${playersOfTheTeam != null && !playersOfTheTeam.isEmpty()}">
+                <li class="list-group-item d-flex justify-content-between align-items-center" th:each="player : ${playersOfTheTeam}">
+                    <a th:href="@{'/player' + '/' + ${player.id}}">
+						<span th:text="${player.name} + ' ' + ${player.lastname}">Giocatore</span>
+					</a>
+                    <!-- Pulsante di Elimina rosso accanto al nome -->
+                    <a th:href="@{'/president/removePlayer' + '/' + ${player.id} + '/' + ${team.id}}" class="btn btn-danger btn-sm">Rimuovi</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="d-flex justify-content-center mb-3">
+            <ul class="list-group w-50" th:if="${freePlayers != null && !freePlayers.isEmpty()}">
+                <li class="list-group-item d-flex justify-content-between align-items-center" th:each="player : ${freePlayers}">
+                    <a th:href="@{'/player' + '/' + ${player.id}}">
+						<span th:text="${player.name} + ' ' + ${player.lastname}">Giocatore</span>
+					</a>
+                    <!-- Pulsante di Aggiungi verde accanto al nome -->
+                    <a th:href="@{'/president/addPlayer' + '/' + ${player.id} + '/' + ${team.id}}" class="btn btn-success btn-sm">Aggiungi</a>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

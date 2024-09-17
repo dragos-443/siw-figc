@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+	<title>FIGC - Registrazione eseguita</title>
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<header class="bg-light p-3">
+		<div class="container">
+			<div class="d-flex justify-content-end">
+				<div th:if="${userDetails}">
+					<span th:text="${userDetails.username}"></span>
+					<a href="/logout" class="btn btn-outline-secondary ms-2">Logout</a>
+				</div>
+				<div th:unless="${user}">
+					<a href="/login" class="btn btn-outline-primary ms-2">Login</a>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="container text-center mt-4">
+		<a href="/">
+			<img src="/images/figc.png" class="img-fluid" alt="Logo SIW" style="max-width: 10%;" />
+		</a>
+	</div>
+
+	<div class="container text-center mt-4">
+		<h1 class="display-4">Congratulazioni, ti sei registrato!</h1>
+	</div>
+
+	<div class="container mt-4">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<!-- Dati dell'utente -->
+				<ul class="list-group">
+					<li class="list-group-item">
+						<strong>Nome:</strong>
+						<span th:text="${user.name}"></span>
+					</li>
+					<li class="list-group-item">
+						<strong>Cognome:</strong>
+						<span th:text="${user.surname}"></span>
+					</li>
+					<li class="list-group-item">
+						<strong>Email:</strong>
+						<span th:text="${user.email}"></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap JS (facoltativo) -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

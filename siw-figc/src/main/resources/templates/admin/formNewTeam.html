@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Team</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header class="container-fluid py-3 border-bottom">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div th:if="${userDetails}">
+                <span th:text="${userDetails.username}" class="me-3"></span>
+                <a href="/logout" class="btn btn-outline-danger">Logout</a>
+            </div>
+            <div th:unless="${user}">
+                <a href="/login" class="btn btn-primary">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Logo and Title Section -->
+    <div class="container my-4 text-center">
+        <a href="/">
+            <img src="/images/figc.png" class="img-fluid" alt="Logo" style="max-width: 10%;" />
+        </a>
+    </div>
+    
+    <div class="container">
+        <h1 class="text-center mb-4">Aggiungi una squadra</h1>
+
+        <!-- Error Message -->
+        <div class="row justify-content-center mb-3">
+            <div class="col-md-6">
+                <div th:if="${messaggioErrore}" class="alert alert-danger" role="alert">
+                    <span th:text="${messaggioErrore}">Errore</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Form -->
+        <form th:action="@{/admin/team}" method="POST" th:object="${team}" class="row justify-content-center">
+            <div class="col-md-6">
+
+                <!-- Nome squadra -->
+                <div class="mb-3">
+                    <label for="teamName" class="form-label">Nome squadra:</label>
+                    <input required type="text" th:field="${team.nomeSquadra}" class="form-control" id="teamName" />
+                </div>
+                
+                <!-- Anno squadra -->
+                <div class="mb-3">
+                    <label for="year" class="form-label">Data fondazione:</label>
+                    <input type="number" th:field="${team.year}" class="form-control" id="year" />
+                </div>
+
+                <!-- Indirizzo -->
+                <div class="mb-3">
+                    <label for="indirizzo" class="form-label">Indirizzo sede sportiva:</label>
+                    <input required type="text" th:field="${team.indirizzo}" class="form-control" id="indirizzo" />
+                </div>
+                
+                <h3>Dati del presidente</h3>
+                
+                <!-- Nome Presidente -->
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nome:</label>
+                    <input required type="text" name="nomePresidente" class="form-control" id="name" />
+                </div>
+                
+                <!-- Cognome Presidente -->
+                <div class="mb-3">
+                    <label for="cognome" class="form-label">Cognome:</label>
+                    <input required type="text" name="cognomePresidente" class="form-control" id="cognome" />
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Conferma</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
